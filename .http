@@ -1,0 +1,20 @@
+###
+POST http://localhost:3001/register
+content-type: application/json
+
+{
+  "username":"arthur",
+  "password": "starikov"
+}
+
+
+###
+GET http://localhost:3001/post/1
+
+###
+PATCH http://localhost:3001/post/1
+content-type: application/json
+
+{
+  "title":"Новый заголовок поста"
+}

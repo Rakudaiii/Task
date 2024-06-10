@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>auth page</title>
+	<link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+	<div class="main-wrapper">
+		<div class="auth-form">
+			<label for="firstName">Username</label>
+			<input type="text" id="username" name="username" required>
+
+			<label for="password">Password</label>
+			<input type="password" id="password" name="password" required>
+
+			<button type="submit" class="submit-btn" id="loginButton">Log in</button>
+		</div>
+	</div>
+
+	<script>
+
+		const formBtn = document.getElementById('loginButton')
+		formBtn.addEventListener('click', async (e) => {
+			e.preventDefault()
+			username = document.getElementById('username').value
+			password = document.getElementById('password').value
+
+			userData = {
+				username: username,
+				password: password
+			}
+			const request = await fetch("http://localhost:3001/register", {
+				method: 'POST',
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify(userData)
+			})
+
+			const data = await request.json()
+
+			if (data) {
+				document.write("redirecting...");
+				var referLink = document.createElement("a");
+				referLink.href = "content.html";
+				document.body.appendChild(referLink);
+				referLink.click();
+				window.location.href = '/content.html'
+			}
+			console.log('@data', data)
+		})
+
+	</script>
+
+</body>
+
+
+</html>

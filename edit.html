@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+	<div class="edit-container">
+
+		<div class="input-container">
+			<label for="title">Title</label>
+			<input type="text" id="title" name="title" required>
+		</div>
+
+		<div class="input-container">
+			<label for="description">Text</label>
+			<input type="text" id="description" name="description" required>
+		</div>
+
+		<button type="submit" class="edit-btn" id="editBtn">Edit</button>
+	</div>
+
+
+	<script>
+
+		const formBtn = document.getElementById('editBtn')
+		formBtn.addEventListener('click', async (e) => {
+			e.preventDefault()
+
+			const id = 1; // Замените на необходимый id
+			const request = await fetch(`http://localhost:3001/post/${id}`, {
+				method: 'PATCH',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify({
+					title: document.getElementById('title').value,
+					description: document.getElementById('description').value,
+				})
+			})
+
+			const data = await request.json()
+
+			if (data) {
+				document.write("redirecting...");
+				var referLink = document.createElement("a");
+				referLink.href = "content.html";
+				document.body.appendChild(referLink);
+				referLink.click();
+				window.location.href = '/content.html'
+			}
+
+		})
+
+	</script>
+
+</body>
+
+</html>
